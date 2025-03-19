@@ -12,9 +12,11 @@ export default class Task extends Component {
     const {edit, label} = this.state;
 
     const onEdit = () => {
-      this.setState({
-        edit: true,
-      });
+      if (!done) {
+        this.setState({
+          edit: true,
+        });
+      }
     };
 
     const onLabelChange = (e) => {
@@ -51,7 +53,7 @@ export default class Task extends Component {
             <span className="description">{discription}</span>
             <span className="created">{formatDistanceToNow(createTime)}</span>
           </label>
-          <button onClick={onEdit} className="icon icon-edit" />
+          {!done && <button onClick={onEdit} className="icon icon-edit" />}
           <button onClick={onDeleted} className="icon icon-destroy" />
         </div>
         {edit && (
